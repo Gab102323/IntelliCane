@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IntelliCANE - Smart Mobility Assistance</title>
     <style>
-        :root {
+          :root {
             --primary: #0066FF;
             --primary-dark: #0052CC;
             --text: #1A1A1A;
@@ -23,11 +23,40 @@
         }
         
         body {
-            background-color: var(--background);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
             font-size: 16px;
+        }
+        
+        /* Background Container */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 50; /* Reduced opacity for better readability */
+        }
+        
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(248, 250, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
         }
         
         .container {
@@ -44,9 +73,10 @@
             left: 0;
             width: 100%;
             padding: 20px 0;
-            background-color: var(--background);
+            background-color: rgba(255, 255, 255, 0.95);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             z-index: 100;
+            backdrop-filter: blur(5px);
         }
         
         .header-container {
@@ -101,13 +131,14 @@
             display: flex;
             align-items: center;
             padding: 120px 0 80px;
-            background: linear-gradient(to bottom, #F8FAFF 0%, #FFFFFF 100%);
+            position: relative;
         }
         
         .hero-content {
             display: flex;
             align-items: center;
             gap: 50px;
+            position: relative;
         }
         
         .hero-text {
@@ -159,16 +190,20 @@
         .secondary-button:hover {
             background-color: rgba(0, 102, 255, 0.1);
         }
-           .floating-circle {
+        
+        .floating-circle {
             position: absolute;
             border-radius: 50%;
             background: rgba(0, 102, 255, 0.05);
             z-index: 0;
         }
+        
         /* Features Section */
         .features {
             padding: 100px 0;
-            background-color: var(--light-bg);
+            background-color: rgba(248, 250, 255, 0.9);
+            backdrop-filter: blur(5px);
+            position: relative;
         }
         
         .section-title {
@@ -190,6 +225,7 @@
             padding: 40px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
+            backdrop-filter: blur(5px);
         }
         
         .feature-card:hover {
@@ -227,6 +263,7 @@
         /* About Section */
         .about {
             padding: 100px 0;
+            position: relative;
         }
         
         .about-content {
@@ -270,7 +307,9 @@
         /* Stats Section */
         .stats {
             padding: 80px 0;
-            background-color: var(--light-bg);
+            background-color: rgba(248, 250, 255, 0.9);
+            backdrop-filter: blur(5px);
+            position: relative;
         }
         
         .stats-grid {
@@ -295,6 +334,7 @@
         /* Team Section */
         .team {
             padding: 100px 0;
+            position: relative;
         }
         
         .team-grid {
@@ -305,6 +345,11 @@
         
         .team-member {
             text-align: center;
+            background-color: var(--background);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
         }
         
         .team-photo {
@@ -327,11 +372,53 @@
             margin-bottom: 15px;
         }
         
+        /* Developer Section */
+        .developer-section {
+            padding: 100px 0;
+            background-color: rgba(248, 250, 255, 0.9);
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+        
+        .developer-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .developer-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .developer-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        
+        .developer-names {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .developer-name {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
         /* Footer */
         footer {
             background-color: var(--text);
             color: white;
             padding: 80px 0 30px;
+            position: relative;
         }
         
         .footer-content {
@@ -404,11 +491,28 @@
             nav ul {
                 display: none;
             }
+            
+            .animated-background {
+                opacity: 0.05; /* Even lower opacity on mobile */
+            }
+            
+            /* Adjust other mobile styles as needed */
+            .feature-card, .team-member {
+                padding: 25px;
+            }
+            
+            .section-title, .about-title {
+                font-size: 2rem;
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+     <div class="background-container">
+        <img src="https://media2.giphy.com/media/MyWrJJIdAfoJuEPlLP/giphy.gif?cid=790b7611b1002e4bd4a4a68fa28d398d3230da256281da0a&rid=giphy.gif&ct=g" class="animated-background" alt="Animated medical background">
+        <div class="background-overlay"></div>
+    </div>
    <!-- Header -->
     <header>
         <div class="container header-container">
@@ -421,7 +525,6 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <button class="cta-button">Get Started</button>
         </div>
     </header>
 
@@ -437,8 +540,7 @@
                     <h1 class="hero-title">Smart Mobility Solution for Independent Living</h1>
                     <p class="hero-subtitle">IntelliCANE combines cutting-edge technology with elegant design to provide safety and independence for users with mobility challenges.</p>
                     <div class="hero-buttons">
-                        <button class="cta-button">Order Now</button>
-                        <button class="secondary-button">Learn More</button>
+                        <button class="cta-button">Learn More</button>
                     </div>
                 </div>
                 <div class="hero-image" id="heroImage">
@@ -478,6 +580,17 @@
                     <p class="feature-description">LED illumination for safe navigation in low-light conditions with adjustable brightness.</p>
                 </div>
             </div>
+                   <div style="display: flex; justify-content: center; margin-top: 40px;">
+                <iframe 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/XtdUkXPoE9c?autoplay=1&loop=1&playlist=XtdUkXPoE9c" 
+                    title="YouTube video" 
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </section>
 
@@ -492,7 +605,7 @@
                     <button class="cta-button">Our Story</button>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About IntelliCANE">
+                    <img src="https://images.fastcompany.net/image/upload/w_596,c_limit,q_auto:best,f_auto/wp-cms/uploads/2022/05/02-90753069-smart-cane.jpg" alt="About IntelliCANE">
                 </div>
             </div>
         </div>
@@ -528,23 +641,23 @@
             <h2 class="section-title">Our Team</h2>
             <div class="team-grid">
                 <div class="team-member">
-                    <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-1023x1024-ucnnjrj1.png" alt="Team Member" class="team-photo">
-                    <h3 class="team-name">SAMPLE IMAGE AND NAME</h3>
+                    <img src="https://scontent.fcrk1-5.fna.fbcdn.net/v/t39.30808-1/492097914_689729450117413_2509077406908156152_n.jpg?stp=cp6_dst-jpg_s200x200_tt6&_nc_cat=105&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeFGI0jKoKpR3Asv-zbw3Rb4u39eYrcQQLC7f15itxBAsG0Un2UST10LWa-_Ld1ROMaFJysSJu5ggVpIf1Otqzur&_nc_ohc=q3u791dPg70Q7kNvwHJD46e&_nc_oc=AdkQ0WsIpPZdTo8mortZWMm2fuXqDY-wAPbHm_Lxn4cxQpb1Ay8U6XXyrbO9HSKmOtE&_nc_zt=24&_nc_ht=scontent.fcrk1-5.fna&_nc_gid=reIm3CUVzQDXoR4HuyszYA&oh=00_AfI5-bBlL8b59oI_yhW2Xc5GHaBMO-ekZmP4ZMykev9BTQ&oe=682F45C3" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">Princess Carlmy Reyes</h3>
                     <p class="team-position">CEO & Founder</p>
                 </div>
                 <div class="team-member">
-                    <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-1023x1024-ucnnjrj1.png" alt="Team Member" class="team-photo">
-                    <h3 class="team-name">SAMPLE IMAGE AND NAME</h3>
+                    <img src="https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-1/467732279_1774211339994197_7346775015387936552_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=110&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeFCRwSaQ0-AgT-QXtAWSx6dLonBaP3jIasuicFo_eMhq17LWH4iBo7yqoJrapGB-k2o4jyTz9QFnzNIU1rcYGe_&_nc_ohc=wHe-k-6lgowQ7kNvwEOXl9q&_nc_oc=Adn6XSRjbO1L-E54YPoYjAroAnBPswvQFqvUFk2fK3GmTZddVHqrfv1vdOIIvlQMLTE&_nc_zt=24&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=9xTudFxlo166Q7aYagFymQ&oh=00_AfJAKU5HHaVqS2XZFWvIAbhULHJCZglRSj5cmegQIvxgcg&oe=682F6235" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">Jesriel Villanueva</h3>
                     <p class="team-position">Product Designer</p>
                 </div>
                 <div class="team-member">
-                    <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-1023x1024-ucnnjrj1.png" alt="Team Member" class="team-photo">
-                    <h3 class="team-name">SAMPLE IMAGE AND NAME</h3>
+                    <img src="https://scontent.fcrk1-4.fna.fbcdn.net/v/t39.30808-1/489770399_2119494828522462_3449462955128584856_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=109&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeGbffAPlrxO-6PZN-20pkQfiPWsBEyJcZWI9awETIlxlSkGeqR1eFTb8bvWoWeTx7uYhnWhFQLAuvky9FK4bX3P&_nc_ohc=jrP_aB-wmPoQ7kNvwHTD8S-&_nc_oc=AdkOJ1aMP998ci1QGiFOCF3J-xczu_vQg_mJjCA-llPEKKSCVD_iHoeI0aPr5GNFbpI&_nc_zt=24&_nc_ht=scontent.fcrk1-4.fna&_nc_gid=SY-Wb6BOdS9lz370cboJ0Q&oh=00_AfLngN4PSZWnTemLlkZ11rb7l8IBG93bARngLwprsHNT6A&oe=682F6C39" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">Ryanne Kristine Cristobal</h3>
                     <p class="team-position">Engineering Lead</p>
                 </div>
                 <div class="team-member">
-                    <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-1023x1024-ucnnjrj1.png" alt="Team Member" class="team-photo">
-                    <h3 class="team-name">SAMPLE IMAGE AND NAME</h3>
+                    <img src="https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-1/487108569_1373199807429703_4988211596571596900_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=110&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeHFo2hn5CYPEH0VJViB7UAa_ZXKrl7xV4v9lcquXvFXi5Cj8p269WBCI0ioLDD6HaIpwceplbanPUFkCWyWMdwQ&_nc_ohc=CFjEANwvJikQ7kNvwHfzwCi&_nc_oc=AdmYnHOt4Lv6wYrQeo2eh_WAGmWjv_wCLFexsKLZ4fweyoXk9I5LoDRXLl4znCmBy8Y&_nc_zt=24&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=WT_mkpFTxKGSY3QLeEEYww&oh=00_AfI0NQTBj5ystAYNH_Gs0B963hTNJzPYakkT1XY8fVpfzA&oe=682F4DA7" alt="Team Member" class="team-photo">
+                    <h3 class="team-name">jan Andrei Santos</h3>
                     <p class="team-position">Customer Support</p>
                 </div>
             </div>
@@ -566,7 +679,7 @@
                         <h3 style="font-size: 1.3rem; margin-bottom: 15px;">Development Team:</h3>
                         <ul style="list-style: none; line-height: 2;">
                             <li>Princess Carlmy D. Reyes</li>
-                            <li>Jesriel Villanueva</li>
+                            <li>________________________</li>
                         </ul>
                     </div>
                 </div>
